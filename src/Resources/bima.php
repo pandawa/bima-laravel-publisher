@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'tables' => ['users', 'schemas'],
+    'tables' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
 
     'drivers' => [
         'http' => [
-            'endpoint' => env('BIMA_HTTP_ENDPOINT', 'http://localhost:8000/api/v1/'),
+            'endpoint' => env('BIMA_HTTP_ENDPOINT'),
             'timeout'  => env('BIMA_HTTP_TIMEOUT', 60 * 5),
         ],
     ],
