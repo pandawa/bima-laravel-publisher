@@ -26,10 +26,10 @@ class PublisherManager extends Manager
     public function createHttpDriver(): HttpPublisher
     {
         return new HttpPublisher(
-            $this->container['config']['bima.drivers.http.endpoint'],
-            $this->container['config']['bima.project_id'],
-            $this->container['config']['bima.token'],
-            $this->container['config']['bima.drivers.http.timeout']
+            $this->app['config']['bima.drivers.http.endpoint'],
+            $this->app['config']['bima.project_id'],
+            $this->app['config']['bima.token'],
+            $this->app['config']['bima.drivers.http.timeout']
         );
     }
 
@@ -38,10 +38,10 @@ class PublisherManager extends Manager
      */
     public function getDefaultDriver(): string
     {
-        if (is_null($this->container['config']['bima.driver'])) {
+        if (is_null($this->app['config']['bima.driver'])) {
             return 'http';
         }
 
-        return $this->container['config']['bima.driver'];
+        return $this->app['config']['bima.driver'];
     }
 }
