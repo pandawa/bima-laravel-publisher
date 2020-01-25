@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace Bima\Client;
 
 use Bima\Client\Listener\SendQueryEvent;
+use Event;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\ServiceProvider;
-use Event;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
@@ -40,7 +40,12 @@ final class BimaClientServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->singleton(PublisherManager::class, fn($app) => new PublisherManager($app));
+        $this->app->singleton(
+            PublisherManager::class,
+            function ($app) {
+                return new PublisherManager($app);
+            }
+        );
         $this->configure();;
     }
 
@@ -59,7 +64,8 @@ final class BimaClientServiceProvider extends ServiceProvider
     protected function configure(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/Resources/bima.php', 'bima'
+            __DIR__.'/Resources/bima.php',
+            'bima'
         );
     }
 }
