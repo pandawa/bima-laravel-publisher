@@ -40,7 +40,7 @@
         },
         "laravel": {
             "providers": [
-                "Bima\\Client\\BimaClientModule"
+                "Bima\\Client\\BimaClientServiceProvider"
             ]
         }
     }
