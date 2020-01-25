@@ -15,16 +15,13 @@ namespace Bima\Client;
 use Bima\Client\Listener\SendQueryEvent;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\ServiceProvider;
-use Pandawa\Component\Module\AbstractModule;
-use Pandawa\Component\Module\Provider\EventProviderTrait;
+use Event;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
  */
 final class BimaClientServiceProvider extends ServiceProvider
 {
-    use EventProviderTrait;
-
     public function boot(): void
     {
         $this->publishes(
@@ -33,6 +30,12 @@ final class BimaClientServiceProvider extends ServiceProvider
             ],
             'bima'
         );
+
+        foreach ($this->listens() as $event => $listeners) {
+            foreach ($listeners as $listener) {
+                Event::listen($event, $listener);
+            }
+        }
     }
 
     public function register(): void
