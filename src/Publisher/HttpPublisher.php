@@ -15,7 +15,6 @@ namespace Bima\Client\Publisher;
 use Bima\Client\Type\Enum\EventType;
 use Bima\Client\Type\SqlEvent;
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 
 /**

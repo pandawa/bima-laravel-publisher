@@ -14,17 +14,18 @@ namespace Bima\Client;
 
 use Bima\Client\Listener\SendQueryEvent;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\ServiceProvider;
 use Pandawa\Component\Module\AbstractModule;
 use Pandawa\Component\Module\Provider\EventProviderTrait;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
  */
-final class BimaClientModule extends AbstractModule
+final class BimaClientServiceProvider extends ServiceProvider
 {
     use EventProviderTrait;
 
-    protected function build(): void
+    public function boot(): void
     {
         $this->publishes(
             [
@@ -34,7 +35,7 @@ final class BimaClientModule extends AbstractModule
         );
     }
 
-    protected function init(): void
+    public function register(): void
     {
         $this->app->singleton(PublisherManager::class, fn($app) => new PublisherManager($app));
         $this->configure();;
